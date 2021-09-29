@@ -14,7 +14,7 @@ module.exports = (conection, DataTypes) => {
         type: DataTypes.STRING(200),
       },
       password: {
-        type: DataTypes.STRING(200),
+        type: DataTypes.STRING(256),
       },
       username: {
         type: DataTypes.STRING(200),

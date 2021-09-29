@@ -1,17 +1,9 @@
-const { User } = require("./src/models");
+const bcrypt = require("bcryptjs");
 
-//insert
+const senha = "123";
 
-User.findOne({
-  where: {
-    name: "Vinicius",
-  },
-});
+const hash = bcrypt.hashSync(senha, 10);
 
-//select
+console.log(hash);
 
-User.delete({
-  where: {
-    name: "Gustavo",
-  },
-}).then((resultado) => console.log(resultado.email));
+console.log("É igual?: ", bcrypt.compareSync("asbcuwsbcuy", hash));

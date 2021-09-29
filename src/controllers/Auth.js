@@ -1,4 +1,5 @@
 const { User } = require("../models");
+const bcrypt = require("bcryptjs");
 
 const authController = {
   showLogin(req, res) {
@@ -11,11 +12,12 @@ const authController = {
   async register(req, res) {
     try {
       const { name, email, password, username } = req.body;
+      const hash = bcrypt.hashSync(password, 10);
 
       const user = await User.create({
         name,
         email,
-        password,
+        password: hash,
         username,
         avatar: "link",
         create_at: new Date().toISOString(),
@@ -42,7 +44,7 @@ const authController = {
         return res.render("auth/login", { error: "Usuario não existe!" });
       }
 
-      if (user.password != password) {
+      if (!bcrypt.compareSync(password, user.password)) {
         return res.render("auth/login", { error: "Senha está errada!" });
       }
 
