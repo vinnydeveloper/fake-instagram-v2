@@ -1,36 +1,36 @@
 module.exports = (conection, DataTypes) => {
-  const User = conection.define(
-    "User",
+  const Publication = conection.define(
+    "Publication",
     {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
       },
-      name: {
+      content: {
         type: DataTypes.STRING(200),
       },
-      email: {
+      image: {
         type: DataTypes.STRING(200),
       },
-      password: {
-        type: DataTypes.STRING(256),
-      },
-      username: {
-        type: DataTypes.STRING(200),
-      },
-      avatar: {
-        type: DataTypes.STRING(200),
+      user_id: {
+        type: DataTypes.INTEGER,
       },
       create_at: {
         type: DataTypes.DATE,
       },
     },
     {
-      tableName: "users",
+      tableName: "publications",
       timestamps: false,
     }
   );
 
-  return User;
+  Publication.associate = (models) => {
+    Publication.belongsTo(models.User, {
+      foreignKey: "user_id",
+    });
+  };
+
+  return Publication;
 };
