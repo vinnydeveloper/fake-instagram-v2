@@ -5,7 +5,7 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.resolve("public", "posts"));
+    cb(null, path.resolve("src", "public", "posts"));
   },
   filename: function (req, file, cb) {
     const extensao = file.originalname.split(".").pop();
