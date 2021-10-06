@@ -38,16 +38,18 @@
       </div>
     </header>
     <main class="container content">
+      <% publications.forEach( publication =>{ %>
+
       <div class="card">
         <div class="card-header">
           <div>
             <img class="avatar" src="/img/avatar-example.png" />
-            <b>Vinny Oliveira</b>
+            <b><%= publication.User.name %></b>
           </div>
           <img src="/img/icons/more-vertical.svg" />
         </div>
         <div class="card-img">
-          <img src="/img/publication_example.jpg" />
+          <img src="/posts/<%= publication.image %>" />
         </div>
         <div class="card-body">
           <div class="card-itens">
@@ -55,7 +57,11 @@
               <img src="/img/icons/heart.svg" />
               <b>10 likes</b>
             </div>
-            <b>Postado no dia: 20/20/2020</b>
+            <b
+              >Postado no dia: <%= new
+              Intl.DateTimeFormat(user.local).format(publication.create_at)
+              %></b
+            >
           </div>
           <div class="card-comments">
             <p><b>Mario Luz</b> Que incrivel!</p>
@@ -71,6 +77,7 @@
           <button type="submit">Publicar</button>
         </form>
       </div>
+      <% }) %>
     </main>
   </body>
 </html>

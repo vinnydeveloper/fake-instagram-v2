@@ -1,9 +1,9 @@
-const bcrypt = require("bcryptjs");
+const { Publication, User } = require("./src/models");
 
-const senha = "123";
-
-const hash = bcrypt.hashSync(senha, 10);
-
-console.log(hash);
-
-console.log("É igual?: ", bcrypt.compareSync("asbcuwsbcuy", hash));
+Publication.findAll({
+  include: [
+    {
+      model: User,
+    },
+  ],
+}).then((teste) => console.log(teste));
