@@ -1,4 +1,4 @@
-const { Publication, User } = require("../models");
+const { Publication, User, Comment } = require("../models");
 const mainController = {
   async showHome(req, res) {
     try {
@@ -7,10 +7,20 @@ const mainController = {
           {
             model: User,
           },
+          {
+            model: Comment,
+            include: [
+              {
+                model: User,
+                attributes: ["name"],
+              },
+            ],
+          },
         ],
+        order: [["create_at", "DESC"]],
       });
-
-      return res.render("home", { publications });
+      console.log(publications[0].Comments[0].User);
+      return res.render("home", { publications: publications });
     } catch (error) {
       console.log(error);
     }

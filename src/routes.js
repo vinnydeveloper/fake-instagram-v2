@@ -5,6 +5,7 @@ const isLogin = require("./middlewares/isLogin");
 const upload = require("./middlewares/upload");
 const authController = require("./controllers/Auth");
 const mainController = require("./controllers/Main");
+const commentController = require("./controllers/Comment");
 
 router.get("/", authController.showLogin);
 router.get("/login", authController.showLogin);
@@ -21,4 +22,5 @@ router.post(
   mainController.createPublication
 );
 
+router.post("/comentario", isLogin, commentController.createComment);
 module.exports = router;
